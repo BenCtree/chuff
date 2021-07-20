@@ -41,7 +41,6 @@ char* huffman_encodings[NUM_ASCII];
 
 int set_ascii_counts(FILE* fp, int ascii_counts[])
 {
-    printf("entered set_ascii_counts\n");
     int num_chars = 0;
     // Get chars in text file one at a time and updates count in ascii_counts
     char c;
@@ -298,8 +297,8 @@ int main(int argc, char* argv[])
     // Get the frequency counts of each character in text file
     fseek(fp, 0, SEEK_SET);
     int num_chars = set_ascii_counts(fp, ascii_counts);
-    print_ascii_counts();
-    printf("\n");
+    //print_ascii_counts();
+    //printf("\n");
 
     // Initialise the head of the linked list
     HTNode* htnode = htnode_init(-1, -1);
@@ -308,18 +307,19 @@ int main(int argc, char* argv[])
     
     // Build linked list storing HTNode pointers sorted by character frequency, smallest to largest.
     head = ll_build(head, ascii_counts);
-    ll_print(head);
-    printf("\n");
+    //ll_print(head);
+    //printf("\n");
     
     // Build Huffman Tree
     head = ht_build(head);
     // Get pointer to root of Huffman tree
     HTNode* ht = head->htnode;
-    ht_print(ht);
-    printf("\n");
+    //ht_print(ht);
+    //printf("\n");
 
     // Generate the binary string encodings for each character in text file
     set_huffman_encodings(ht);
+    printf("Huffman encodings:\n");
     print_huffman_encodings(huffman_encodings, ascii_counts);
 
     // Set file pointer back to start of file
